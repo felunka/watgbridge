@@ -1,0 +1,23 @@
+services:
+  app:
+    build: .
+    container_name: watgbridge
+    depends_on:
+      - db
+    volumes:
+      - type: bind
+        source: ./config.yaml
+        target: /go/src/watgbridge/config.yaml
+      - type: bind
+        source: ./wawebstore.db
+        target: /go/src/watgbridge/wawebstore.db
+  db:
+    image: postgres:13.1-alpine
+    hostname: ${POSTGRES_HOSTNAME:-db}
+    volumes:
+      - db-data:/var/lib/postgresql/data
+    environment:
+      POSTGRES_USER: whatsapp_bridge
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-db}
+volumes:
+  db-data:
