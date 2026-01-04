@@ -8,9 +8,7 @@ services:
       - type: bind
         source: ./config.yaml
         target: /go/src/watgbridge/config.yaml
-      - type: bind
-        source: ./wawebstore.db
-        target: /go/src/watgbridge/wawebstore.db
+      - login_database:/go/src/watgbridge/state
   db:
     image: postgres:13.1-alpine
     hostname: ${POSTGRES_HOSTNAME:-db}
@@ -21,3 +19,4 @@ services:
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-db}
 volumes:
   db-data:
+  login_database:
