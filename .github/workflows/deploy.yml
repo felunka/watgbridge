@@ -18,7 +18,7 @@ jobs:
         uses: actions/checkout@v2
       - name: Write config
         run: |
-          cat << 'EOF' > config.yml
+          cat << 'EOF' > config.yaml
           ${{ secrets.CONFIG }}
           EOF
       - name: Run containers
